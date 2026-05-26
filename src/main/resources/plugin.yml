@@ -1,0 +1,49 @@
+name: PowerSink
+version: v1.0
+main: tv.voidstar.powersink.PowerSink
+api-version: '1.20'
+description: 允许玩家出售和购买能量的插件。
+authors: [nyamura]
+
+softdepend:
+  - Vault
+  - Mekanism
+  - ImmersiveEngineering
+
+commands:
+  powersink:
+    description: PowerSink 主命令
+    aliases: [ps]
+    usage: /ps <list|help|remove|reload>
+  ps:
+    description: PowerSink 别名命令
+    usage: /ps <list|help|remove|reload>
+
+permissions:
+  powersink.setup.sink:
+    description: 注册方块为能量接收节点
+    default: true
+  powersink.setup.source:
+    description: 注册方块为能量输出节点
+    default: true
+  powersink.list.self:
+    description: 查看自己的能量节点列表
+    default: true
+  powersink.list.other:
+    description: 查看其他玩家的能量节点列表
+    default: op
+  powersink.remove.self:
+    description: 删除自己的能量节点
+    default: true
+  powersink.remove.other:
+    description: 删除其他玩家的能量节点
+    default: op
+  powersink.limit.admin:
+    description: 管理员组限制等级
+    default: op
+  powersink.limit.player:
+    description: 玩家组限制等级
+    default: true
+  powersink.limit.default:
+    description: 默认组限制等级
+    default: true

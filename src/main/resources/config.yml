@@ -1,0 +1,40 @@
+# PowerSink 配置文件
+# 文档：https://github.com/voidstar/PowerSink
+
+powersink:
+  # 能量节点的处理间隔（以 tick 为单位）。20 tick = 1 秒。
+  tickInterval: 2
+  # 是否允许创建新节点
+  allowCreate:
+    sink: false
+    source: true
+
+# 玩家注册/删除节点时需要手持的物品。
+# 使用 Bukkit Material 名称（大写），例如 GLOWSTONE_DUST, REDSTONE, LEVER
+activationItems:
+  source: REDSTONE
+  sink: GLOWSTONE_DUST
+  remove: LEVER
+
+rates:
+  # 每次 tick 周期移动的最大能量值 (FE/RF/J)
+  maxEnergyTransaction: 1000000
+  # 能量→金钱的最终倍率（公式结果 × ratio = 实际金钱）
+  ratio: 0.05
+  # 转换函数："log" 或 "root"
+  function: log
+  # 转换函数的参数
+  base: 100.0
+  multiplier: 10.0
+  shift: 10.0
+
+# 每个权限组的节点限制。按顺序检查组，第一个匹配的生效。
+# "default" 组始终最后检查。
+# 权限：powersink.limit.<组名>
+limits:
+  - group: admin
+    sink: 1000
+    source: 1000
+  - group: default
+    sink: 10
+    source: 10

@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'java-library'
+}
+
+group = 'tv.voidstar.powersink'
+version = 'v1.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    // Vault
+    maven { url = 'https://nexus.hc.to/content/repositories/pub_releases' }
+}
+
+configurations {
+    // Soft-depend optional jars placed in libs/
+    optionalCompile
+    compileOnly.extendsFrom optionalCompile
+}
+
+dependencies {
+    // Paper API 1.20.1
+    compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
+
+    // Vault (economy abstraction) — required at runtime, soft-depend in plugin.yml
+    compileOnly 'net.milkbowl.vault:VaultAPI:1.7'
+
+    // Optional: Mekanism / Immersive Engineering API jars
+    // Place the -api.jar files in libs/ folder to enable compilation support.
+    // Without them the plugin still compiles and runs; mod support is detected at runtime via reflection.
+    if (file('libs').exists()) {
+        optionalCompile fileTree(dir: 'libs', include: ['*.jar'])
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+jar {
+    archiveFileName = 'PowerSink-' + version + '.jar'
+}
